@@ -5,20 +5,31 @@ import Main from './screens/Main/Main';
 import Layout from './Layout/Layout';
 import Login from './screens/Login/Login';
 import Favorites from './screens/Favorites/Favorites';
-import Offer from './screens/Offer/Offer';
+import OfferScreen from './screens/Offer/Offer';
 import NotFound from './screens/NotFound/NotFound';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import { Offer } from './types/offer';
 
+type PropsApp = {
+    offers : Offer[],
+}
 
-function App(){
+function App(props:PropsApp){
     return (
         <BrowserRouter>
             <Routes>
                 <Route path={AppRoute.Root} element={<Layout />}>
-                    <Route index element={<Main/>} />
+                    <Route index element={<Main offers={props.offers}/>} />
                     <Route path={AppRoute.Login} element={<Login />} />
-                    <Route path={AppRoute.Favorites} element={<PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}><Favorites /></PrivateRoute>} />
-                    <Route path={AppRoute.Offer} element={<Offer />} />
+                    <Route 
+                        path={AppRoute.Favorites} 
+                        element={
+                            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                                <Favorites offers={props.offers} />
+                            </PrivateRoute>
+                        } 
+                    />
+                    <Route path={AppRoute.Offer} element={<OfferScreen />} />
                 </Route>
                 <Route path='*' element={<NotFound />} />
             </Routes>

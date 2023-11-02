@@ -1,8 +1,12 @@
-import React from 'react';
-import Card from './component/Card/Card';
- 
+import React from 'react'; 
+import { Offer } from '../../types/offer';
+import ListCard from '../../shared/ListCard/ListCard'; 
 
-function Main() : JSX.Element{
+type PropsMain = {
+    offers : Offer[],
+}
+
+function Main(props:PropsMain) : JSX.Element{
     return ( 
         <div className="page page--gray page--main">
             <header className="header">
@@ -93,48 +97,7 @@ function Main() : JSX.Element{
                                 </ul>
                             </form>
                             <div className="cities__places-list places__list tabs__content">
-                                <Card 
-                                    mark="Premium"
-                                    imgPath="img/apartment-01.jpg"
-                                    priceValue={120} 
-                                    name="Beautiful &amp; luxurious apartment at great location"
-                                    type="Apartment"
-                                    bookmark={false}
-                                    rating={80}
-                                />
-                                <Card  
-                                    imgPath="img/room.jpg"
-                                    priceValue={80} 
-                                    name = "Wood and stone place"
-                                    type="Room"
-                                    bookmark={true}
-                                    rating={80}
-                                />
-                                <Card 
-                                    imgPath="img/apartment-02.jpg"
-                                    priceValue={132} 
-                                    name = "Canal View Prinsengracht"
-                                    type="Apartment"
-                                    bookmark={false}
-                                    rating={80}
-                                />
-                                <Card 
-                                    mark='Premium'
-                                    imgPath="img/apartment-03.jpg"
-                                    priceValue={180} 
-                                    name = "Nice, cozy, warm big bed apartment"
-                                    type="Apartment"
-                                    bookmark={false}
-                                    rating={100}
-                                />
-                                <Card 
-                                    imgPath="img/room.jpg"
-                                    priceValue={80} 
-                                    name = "Wood and stone place"
-                                    type="Room"
-                                    bookmark={true}
-                                    rating={80}
-                                />
+                                <ListCard cardType='cities' offers={props.offers} />
                             </div>
                         </section>
                         <div className="cities__right-section">
