@@ -1,15 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 
-type CardProps = {
+type PropsCardCities = {
+    id: number,
     mark?: string,
     imgPath: string, 
     priceValue: number, 
     name: string,
     type: string,
     bookmark:boolean,
-    rating: number
+    rating: number,
 }
-function Card(props:CardProps) {
+function CardCities(props:PropsCardCities) {
     return (
         <article className="cities__card place-card">
             {
@@ -19,7 +21,7 @@ function Card(props:CardProps) {
                 </div> : null
             }
             <div className="cities__image-wrapper place-card__image-wrapper">
-                <a href="#">
+                <Link to={'/offer/'+props.id}>
                     <img 
                         className="place-card__image" 
                         src={props.imgPath} 
@@ -27,7 +29,7 @@ function Card(props:CardProps) {
                         height="200" 
                         alt="Place image"
                     />
-                </a>
+                </Link>
             </div>
             <div className="place-card__info">
                 <div className="place-card__price-wrapper">
@@ -49,7 +51,7 @@ function Card(props:CardProps) {
                     </div>
                 </div>
                 <h2 className="place-card__name">
-                    <a href="#">{props.name}</a>
+                    <Link to={'/offer/'+props.id}>{props.name}</Link>
                 </h2>
                 <p className="place-card__type">{props.type}</p>
             </div>
@@ -57,4 +59,4 @@ function Card(props:CardProps) {
     )
 }
 
-export default Card;
+export default CardCities;
